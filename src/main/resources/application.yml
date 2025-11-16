@@ -10,4 +10,5 @@ spring:
         - id: userManager
           uri: http://localhost:8090
           predicates:
-            - Path=/users/**
+            #- Path=/users/**
+            - Path=/auth/**
