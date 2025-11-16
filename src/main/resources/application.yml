@@ -6,9 +6,15 @@ spring:
     name: gateway
   cloud:
     gateway:
-      routes:
-        - id: userManager
-          uri: http://localhost:8090
-          predicates:
-            #- Path=/users/**
-            - Path=/auth/**
+      server:
+        webflux:
+          routes:
+                    - id: userManager_users
+                      uri: http://localhost:8090
+                      predicates:
+                        - Path=/users/**
+
+                    - id: userManager_auth
+                      uri: http://localhost:8090
+                      predicates:
+                        - Path=/auth/**
