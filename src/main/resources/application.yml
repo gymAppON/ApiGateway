@@ -9,11 +9,18 @@ spring:
       server:
         webflux:
           routes:
+                    - id: oauth2_login
+                      uri: http://localhost:8090
+                      predicates:
+                      - Path=/login/oauth2/**
+                    - id: oauth2_login2
+                      uri: http://localhost:8090
+                      predicates:
+                        - Path=/oauth2/**
                     - id: userManager_users
                       uri: http://localhost:8090
                       predicates:
                         - Path=/users/**
-
                     - id: userManager_auth
                       uri: http://localhost:8090
                       predicates:
