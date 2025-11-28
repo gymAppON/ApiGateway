@@ -24,6 +24,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
 
+    implementation ("io.jsonwebtoken:jjwt-api:0.13.0")
+    implementation ("io.jsonwebtoken:jjwt-impl:0.13.0")
+    implementation ("io.jsonwebtoken:jjwt-jackson:0.13.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

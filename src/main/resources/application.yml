@@ -1,6 +1,9 @@
 server:
   port: 8080
 
+jwt:
+  secret: ${JWT_SECRET}
+
 spring:
   application:
     name: gateway
@@ -13,14 +16,19 @@ spring:
                       uri: http://localhost:8090
                       predicates:
                       - Path=/login/oauth2/**
+
                     - id: oauth2_login2
                       uri: http://localhost:8090
                       predicates:
                         - Path=/oauth2/**
+
                     - id: userManager_users
                       uri: http://localhost:8090
                       predicates:
                         - Path=/users/**
+                      filters:
+                        - AuthenticationFilter
+
                     - id: userManager_auth
                       uri: http://localhost:8090
                       predicates:
