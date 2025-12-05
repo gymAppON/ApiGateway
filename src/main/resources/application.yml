@@ -12,24 +12,34 @@ spring:
       server:
         webflux:
           routes:
-                    - id: oauth2_login
-                      uri: http://localhost:8090
-                      predicates:
-                      - Path=/login/oauth2/**
+            - id: oauth2_login
+              uri: http://localhost:8090
+              predicates:
+                - Path=/login/oauth2/**
+              filters:
+                - AddRequestHeader=x-internal-api-key, ${USER_MANAGER_API_KEY}
 
-                    - id: oauth2_login2
-                      uri: http://localhost:8090
-                      predicates:
-                        - Path=/oauth2/**
+            - id: oauth2_login2
+              uri: http://localhost:8090
+              predicates:
+                - Path=/oauth2/**
+              filters:
+                - AddRequestHeader=x-internal-api-key, ${USER_MANAGER_API_KEY}
 
-                    - id: userManager_users
-                      uri: http://localhost:8090
-                      predicates:
-                        - Path=/users/**
-                      filters:
-                        - AuthenticationFilter
+            - id: userManager_users
+              uri: http://localhost:8090
+              predicates:
+                - Path=/users/**
+              filters:
+                - AddRequestHeader=x-internal-api-key, ${USER_MANAGER_API_KEY}
+                - AuthenticationFilter
 
-                    - id: userManager_auth
-                      uri: http://localhost:8090
-                      predicates:
-                        - Path=/auth/**
+            - id: userManager_auth
+              uri: http://localhost:8090
+              predicates:
+                - Path=/auth/**
+              filters:
+                - AddRequestHeader=x-internal-api-key, ${USER_MANAGER_API_KEY}
+          default-filters:
+            - TokenRelay
+            - SaveSession
