@@ -12,6 +12,7 @@ spring:
       server:
         webflux:
           routes:
+            #OAuth2 routes
             - id: oauth2_login
               uri: http://localhost:8090
               predicates:
@@ -26,6 +27,7 @@ spring:
               filters:
                 - AddRequestHeader=x-internal-api-key, ${USER_MANAGER_API_KEY}
 
+            #User Manager routes
             - id: userManager_users
               uri: http://localhost:8090
               predicates:
@@ -40,6 +42,15 @@ spring:
                 - Path=/auth/**
               filters:
                 - AddRequestHeader=x-internal-api-key, ${USER_MANAGER_API_KEY}
+
+              #Workout Manager routes
+            - id: workoutManager_exercises
+              uri: http://localhost:8070
+              predicates:
+                - Path=/exercises/**
+              filters:
+                - AddRequestHeader=x-internal-api-key, ${WORKOUT_MANAGER_API_KEY}
+                - AuthenticationFilter
           default-filters:
             - TokenRelay
             - SaveSession
