@@ -43,11 +43,20 @@ spring:
               filters:
                 - AddRequestHeader=x-internal-api-key, ${USER_MANAGER_API_KEY}
 
-              #Workout Manager routes
+              #Workout Manager routes - Exercises
             - id: workoutManager_exercises
               uri: http://localhost:8070
               predicates:
                 - Path=/exercises/**
+              filters:
+                - AddRequestHeader=x-internal-api-key, ${WORKOUT_MANAGER_API_KEY}
+                - AuthenticationFilter
+
+            #Workout Manager routes - Workouts
+            - id: workoutManager_workouts
+              uri: http://localhost:8070
+              predicates:
+                - Path=/workout/**
               filters:
                 - AddRequestHeader=x-internal-api-key, ${WORKOUT_MANAGER_API_KEY}
                 - AuthenticationFilter
