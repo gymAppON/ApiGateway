@@ -60,6 +60,15 @@ spring:
               filters:
                 - AddRequestHeader=x-internal-api-key, ${WORKOUT_MANAGER_API_KEY}
                 - AuthenticationFilter
+
+            #Workout Manager routes - Trainings
+            - id: workoutManager_trainings
+              uri: http://localhost:8070
+              predicates:
+                - Path=/training/**
+              filters:
+                - AddRequestHeader=x-internal-api-key, ${WORKOUT_MANAGER_API_KEY}
+                - AuthenticationFilter
           default-filters:
             - TokenRelay
             - SaveSession
